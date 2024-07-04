@@ -35,6 +35,14 @@ export const StyledInput = styled.input`
 
 `
 
-export const MyButton = styled.button`
+export const StyledButton = styled.button`
+    padding: 15px;
+
+    background-color:  #023E7D;
+    color: white;
+    
+    border-radius: 15px;
+    font-weight: 600;
+    border: 1px #023E7D solid;
     
 `

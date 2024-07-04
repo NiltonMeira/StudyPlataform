@@ -1,6 +1,7 @@
 import { StyledForm } from "./style"
 import { MainContainer } from "./style"
 import { StyledInput } from "./style";
+import { StyledButton } from "./style";
 
 export const Form = () => {
     return (
@@ -12,6 +13,7 @@ export const Form = () => {
                     <StyledInput placeholder=""></StyledInput>
                     <p>Password</p>
                     <StyledInput placeholder=""></StyledInput>
+                    <StyledButton>Login</StyledButton>
                 </StyledForm>
             </MainContainer>
 

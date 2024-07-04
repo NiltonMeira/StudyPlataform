@@ -4,7 +4,7 @@ export const Login = () =>{
     return(
         <>
             <Form/>
-            <p>Heloo</p>
+
         </>
     )
 }

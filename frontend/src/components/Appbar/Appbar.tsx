@@ -12,7 +12,7 @@ const Appbar = () =>{
                 <StyledContainer>
                     <StyledA href="">Login</StyledA>
                     <StyledA href="">Sign up</StyledA>
-                    <StyledA href="">Cursos</StyledA>
+                    <StyledA href="">Classes</StyledA>
                 </StyledContainer>
     
             </StyledNav>
