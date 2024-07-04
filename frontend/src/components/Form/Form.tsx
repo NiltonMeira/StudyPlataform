@@ -1,11 +1,20 @@
 import { StyledForm } from "./style"
+import { MainContainer } from "./style"
+import { StyledInput } from "./style";
 
-export const Form = () =>{
-    return(
+export const Form = () => {
+    return (
         <>
-            <StyledForm customMargin={30}>
-                <input type="text"/>
-            </StyledForm>
+
+            <MainContainer>
+                <StyledForm customMargin={30}>
+                    <p>User</p>
+                    <StyledInput placeholder=""></StyledInput>
+                    <p>Password</p>
+                    <StyledInput placeholder=""></StyledInput>
+                </StyledForm>
+            </MainContainer>
+
 
         </>
     )

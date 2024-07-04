@@ -11,6 +11,7 @@ export const App = ({children}:IAppProps) =>{
     <>
       <Appbar/>
       {children}
+      
     </>
   )
 }

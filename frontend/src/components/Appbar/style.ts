@@ -13,6 +13,7 @@ export const StyledNav = styled.nav`
     position: fixed;
     z-index: 99;
     background-color: #141414;
+    top: 0;
 `
 
 export const StyledA = styled.a`
