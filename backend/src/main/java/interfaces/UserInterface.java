@@ -1,10 +1,10 @@
-package service;
+package interfaces;
 
 import model.User;
 import java.util.List;
 
-public interface userService{
-    Boolean verifyUser(User user);
+public interface UserInterface {
+    Boolean verifyUser(String username, String email);
     Boolean verifyPassword(User user);
     Boolean verifyEmail(User user);
     List<User> findByUsername(String username);

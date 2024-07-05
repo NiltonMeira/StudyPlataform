@@ -1,14 +1,16 @@
-import impl.DatabaseUserService;
+package configurations;
+
+import services.DatabaseUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import service.userService;
+import interfaces.UserInterface;
 
 @Configuration
 public class DependenciesConfiguration {
     @Bean
     @Scope("singleton")
-    public userService userService() {
+    public UserInterface userService() {
         return new DatabaseUserService();
     }
 

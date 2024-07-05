@@ -1,31 +1,25 @@
-package impl;
+package services;
 
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import repositorie.UserJPARepository;
-import service.userService;
+import interfaces.UserInterface;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+@Service
+public class DatabaseUserService implements UserInterface {
 
-public class DatabaseUserService implements userService {
-
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     UserJPARepository repo;
 
     @Override
-    public Boolean verifyUser(User user) {
-        String username = user.getUsername();
-        String email = user.getEmail();
-
-        if(email.contains("nilton")) {
-            System.out.println("é gayddffd ");
-        }
-
+    public Boolean verifyUser(String username, String email) {
         return repo.findByUsername(username).isEmpty() && repo.findByEmail(email).isEmpty();
     }
+
 
     @Override
     public Boolean verifyPassword(User user) {
