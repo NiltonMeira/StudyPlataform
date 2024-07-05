@@ -2,11 +2,11 @@ package exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-@ResponseStatus(value = HttpStatus.CONFLICT)
-public class ConflictException extends RuntimeException {
-    public ConflictException(String mesage){
-        super(mesage);
+public class ConflictException extends ResponseStatusException {
+    public ConflictException(){
+        super("You cantn't create a already exi",400);
     }
 
 }
