@@ -1,7 +1,6 @@
 package services;
 
 import dto.user.UserCreator;
-import dto.user.UserPostReturn;
 import exceptions.ConflictException;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +21,29 @@ public class DatabaseUserService implements UserInterface {
     UserInterface service;
 
     @Override
-    public UserPostReturn newUser(UserCreator userCreator) {
+    public User newUser(UserCreator userCreator) {
         if (!verifyUser(userCreator.username(), userCreator.email()))
             throw new ConflictException();
 
         if (!verifyEmail(userCreator.email()))
             throw new ConflictException(); // create a wrong email exeption
 
+        String password = createPassword(userCreator.username(),userCreator.role().name(),userCreator.cpf());
 
+        return new User(userCreator.username(),userCreator.email(), password,userCreator.role(),userCreator.cpf(),userCreator.cep(),userCreator.street(),userCreator.neighborhood(),userCreator.housenumber());
+    }
 
-        return service.checkUser(userCreator);
+    public String createPassword(String username, String role, String cpf) {
+        return username + role + cpf;
     }
 
     @Override
     public Boolean verifyUser(String username, String email) {
-        var Test = repo.findBy(username);
+        return findByUsername(username).isEmpty() && findByEmail(email).isEmpty();
     }
 
     @Override
-    public Boolean verifyPassword(User user) {
-        String password = user.getPassword();
+    public Boolean verifyPassword(String password) {
 
         if (password.length() < 6)
             return false;

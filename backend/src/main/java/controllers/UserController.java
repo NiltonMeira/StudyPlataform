@@ -2,10 +2,12 @@ package controllers;
 
 import dto.user.UserCreator;
 import interfaces.UserInterface;
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import repositoriess.UserJPARepository;
 
 @RestController
 public class UserController {
@@ -13,11 +15,16 @@ public class UserController {
     @Autowired
     UserInterface service;
 
+    @Autowired
+    UserJPARepository repo;
+
 
 
     @PostMapping
-    public String postUser(@RequestBody UserCreator usercreator)
+    public User postUser(@RequestBody UserCreator usercreator)
     {
-        return "banana";
+        User user = service.newUser(usercreator);
+        repo.save(user);
+        return user;
     }
 }
