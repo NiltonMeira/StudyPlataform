@@ -1,5 +1,7 @@
 package services;
 
+import dto.user.UserCreator;
+import dto.user.UserPostReturn;
 import exceptions.ConflictException;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +23,16 @@ public class DatabaseUserService implements UserInterface {
     UserInterface service;
 
     @Override
-    public Boolean verifyUser(String username, String email) {
-
-        if (service.verifyUser(username, email))
+    public UserPostReturn checkUser(UserCreator userCreator) {
+        if (!verifyUser(userCreator.username(), userCreator.email()))
             throw new ConflictException();
-
-        if (service.verifyUser(username, email))
-            throw new ConflictException(); // Here we must create a new type of exception
-
-        if (service.verifyUser(username, email))
-            throw new ConflictException(); // Here we must create a new type of exception
-
-
-
-        return repo.findByUsername(username).isEmpty() && repo.findByEmail(email).isEmpty();
+        return service.checkUser(userCreator);
     }
 
+    @Override
+    public Boolean verifyUser(String username, String email) {
+        return repo.findByUsername(username).isEmpty() && repo.findByEmail(email).isEmpty();
+    }
 
     @Override
     public Boolean verifyPassword(User user) {
@@ -70,8 +66,7 @@ public class DatabaseUserService implements UserInterface {
     }
 
     @Override
-    public Boolean verifyEmail(User user) {
-        String email = user.getEmail();
+    public Boolean verifyEmail(String email) {
         String email_regex = "^([\\w\\.-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
 
         Pattern pattern = Pattern.compile(email_regex);
@@ -89,4 +84,6 @@ public class DatabaseUserService implements UserInterface {
     public List<User> findByEmail(String email) {
         return repo.findByEmail(email);
     }
+
+
 }

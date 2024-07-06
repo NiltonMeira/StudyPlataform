@@ -1,5 +1,6 @@
 package model;
 
+import enums.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,8 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "UserData")
-
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,14 +20,23 @@ public class User {
     @Column(name = "Username")
     private String username;
 
-    @Column(name = "Email")
-    private String email;
-
     @Column(name = "Password")
     private String password;
 
+    @Column(name = "Role")
+    private Roles role;
+
     @Column(name = "CPF")
     private String cpf;
+
+    @Column(name = "Street")
+    private String street;
+
+    @Column(name = "Neiighborhood")
+    private String neighborhood;
+
+    @Column(name = "HouseNumber")
+    private String houseNumber;
 }
 
 
