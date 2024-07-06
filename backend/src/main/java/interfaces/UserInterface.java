@@ -11,6 +11,6 @@ public interface UserInterface {
     Boolean verifyEmail(String email);
     List<User> findByUsername(String username);
     List<User> findByEmail(String email);
-    UserPostReturn checkUser(UserCreator userCreator);
+    UserPostReturn newUser(UserCreator userCreator);
 }
 

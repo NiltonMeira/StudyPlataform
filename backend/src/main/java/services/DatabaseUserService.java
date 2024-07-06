@@ -5,9 +5,8 @@ import dto.user.UserPostReturn;
 import exceptions.ConflictException;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataException;
 import org.springframework.stereotype.Service;
-import repositorie.UserJPARepository;
+import repositoriess.UserJPARepository;
 import interfaces.UserInterface;
 
 import java.util.List;
@@ -23,15 +22,21 @@ public class DatabaseUserService implements UserInterface {
     UserInterface service;
 
     @Override
-    public UserPostReturn checkUser(UserCreator userCreator) {
+    public UserPostReturn newUser(UserCreator userCreator) {
         if (!verifyUser(userCreator.username(), userCreator.email()))
             throw new ConflictException();
+
+        if (!verifyEmail(userCreator.email()))
+            throw new ConflictException(); // create a wrong email exeption
+
+
+
         return service.checkUser(userCreator);
     }
 
     @Override
     public Boolean verifyUser(String username, String email) {
-        return repo.findByUsername(username).isEmpty() && repo.findByEmail(email).isEmpty();
+        var Test = repo.findBy(username);
     }
 
     @Override
