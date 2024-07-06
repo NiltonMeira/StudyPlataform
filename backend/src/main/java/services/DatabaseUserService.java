@@ -64,11 +64,7 @@ public class DatabaseUserService implements UserInterface {
         Pattern digitPattern = Pattern.compile("[0-9]");
         Matcher digitMatcher = digitPattern.matcher(password);
 
-        if (!digitMatcher.find()) {
-            return false;
-        }
-
-        return true;
+        return digitMatcher.find();
 
     }
 

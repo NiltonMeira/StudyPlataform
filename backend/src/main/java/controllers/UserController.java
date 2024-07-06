@@ -18,8 +18,6 @@ public class UserController {
     @Autowired
     UserJPARepository repo;
 
-
-
     @PostMapping
     public User postUser(@RequestBody UserCreator usercreator)
     {
