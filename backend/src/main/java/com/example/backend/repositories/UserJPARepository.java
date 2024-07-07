@@ -1,6 +1,7 @@
-package repositoriess;
+package com.example.backend.repositories;
 
-import model.User;
+
+import com.example.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

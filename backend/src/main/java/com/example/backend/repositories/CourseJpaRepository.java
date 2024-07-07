@@ -1,6 +1,7 @@
-package repositoriess;
+package com.example.backend.repositories;
 
-import model.Courses;
+
+import com.example.backend.model.Courses;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

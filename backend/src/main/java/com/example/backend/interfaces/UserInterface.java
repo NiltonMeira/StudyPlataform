@@ -1,7 +1,8 @@
-package interfaces;
+package com.example.backend.interfaces;
 
-import dto.user.UserCreator;
-import model.User;
+import com.example.backend.dto.UserCreator;
+import com.example.backend.model.User;
+
 import java.util.List;
 
 public interface UserInterface {

@@ -1,6 +1,7 @@
-package controllers;
+package com.example.backend.controllers;
 
-import exceptions.ResponseException;
+
+import com.example.backend.exceptions.ResponseException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

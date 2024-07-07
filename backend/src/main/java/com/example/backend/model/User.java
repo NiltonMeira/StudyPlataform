@@ -1,6 +1,7 @@
-package model;
+package com.example.backend.model;
 
-import enums.Roles;
+
+import com.example.backend.enums.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import lombok.*;
 @Table(name = "UserData")
 public class User {
 
-    public User(String userName, String email, String password, Roles role,String cpf,String cep, String street,String neighborhood, String houseNumber) {
+    public User(String userName, String email, String password, Roles role, String cpf, String cep, String street, String neighborhood, String houseNumber) {
         this.username = userName;
         this.email = email;
         this.password = password;

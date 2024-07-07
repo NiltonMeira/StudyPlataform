@@ -1,4 +1,4 @@
-package exceptions;
+package com.example.backend.exceptions;
 
 public class InvalidEmailException extends ResponseException {
     public InvalidEmailException() {

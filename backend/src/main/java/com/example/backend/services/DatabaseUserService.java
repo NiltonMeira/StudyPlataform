@@ -1,12 +1,18 @@
-package services;
+package com.example.backend.services;
 
-import dto.user.UserCreator;
-import exceptions.ConflictException;
-import model.User;
+
+import com.example.backend.dto.UserCreator;
+import com.example.backend.exceptions.ConflictException;
+import com.example.backend.interfaces.UserInterface;
+import com.example.backend.model.User;
+import com.example.backend.repositories.UserJPARepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import repositoriess.UserJPARepository;
-import interfaces.UserInterface;
+
+
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,13 +23,17 @@ public class DatabaseUserService implements UserInterface {
     @Autowired
     UserJPARepository repo;
 
+    @Qualifier("userBean")
+    @Lazy
     @Autowired
     UserInterface service;
 
     @Override
     public User newUser(UserCreator userCreator) {
-        if (!verifyUser(userCreator.username(), userCreator.email()))
+        if (!verifyUser(userCreator.username(), userCreator.email())){
             throw new ConflictException();
+        }
+
 
         if (!verifyEmail(userCreator.email()))
             throw new ConflictException(); // create a wrong email exeption
@@ -87,6 +97,5 @@ public class DatabaseUserService implements UserInterface {
     public List<User> findByEmail(String email) {
         return repo.findByEmail(email);
     }
-
 
 }
