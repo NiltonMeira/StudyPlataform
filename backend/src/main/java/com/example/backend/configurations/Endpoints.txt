@@ -1,0 +1,16 @@
+User:
+Post - Add User check
+Post - Login
+Get - Find All users
+Patch - Edit User
+
+---------------------------------
+Courses:
+Post -  Add User
+Get -  Get all courses
+Patch - Edit Courses
+
+Registration
+Post
+Get
+Patch

@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.example.backend.services.PasswordEncoder.encode;
+
 @Service
 public class DatabaseUserService implements UserInterface {
 
@@ -44,7 +47,8 @@ public class DatabaseUserService implements UserInterface {
     }
 
     public String createPassword(String username, String role, String cpf) {
-        return username + role + cpf;
+        var rawPassword = username + role + cpf;
+        return encode(rawPassword);
     }
 
     @Override
