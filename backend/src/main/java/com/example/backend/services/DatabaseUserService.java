@@ -40,8 +40,9 @@ public class DatabaseUserService implements UserInterface {
             throw new ConflictException(); // create a wrong email exeption
 
         String password = createPassword(userCreator.username(),userCreator.role().name(),userCreator.cpf());
-
-        return new User(userCreator.username(),userCreator.email(), password,userCreator.role(),userCreator.cpf(),userCreator.cep(),userCreator.street(),userCreator.neighborhood(),userCreator.housenumber());
+        User user = new User(userCreator.username(),userCreator.email(), password,userCreator.role(),userCreator.cpf(),userCreator.cep(),userCreator.street(),userCreator.neighborhood(),userCreator.housenumber());
+        repo.save(user);
+        return user;
     }
 
     public String createPassword(String username, String role, String cpf) {

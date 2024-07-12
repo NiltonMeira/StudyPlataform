@@ -3,6 +3,6 @@ package com.example.backend.interfaces;
 import com.example.backend.dto.UserLoginDto;
 
 public interface LoginInterface {
-    Boolean checkLogin(String email, String password);
+    void checkLogin(String email);
     String doLogin(UserLoginDto userLoginDto);
 }

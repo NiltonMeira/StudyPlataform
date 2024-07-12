@@ -30,12 +30,11 @@ public class LoginService  implements LoginInterface {
 
 
     @Override
-    public Boolean checkLogin(String email, String password) {
+    public void checkLogin(String email) {
 
         if (repo.findByEmail(email) == null)
             throw new ObjectNotFindException();
 
-        return null;
     }
 
     @Override
@@ -44,10 +43,13 @@ public class LoginService  implements LoginInterface {
         var oldPassword = users.getFirst().getPassword();
         var isValidLogin = validateLogin(userLoginDto.password(), oldPassword);
 
-        if (isValidLogin)
-            return createToken(publicKey,privateKey,userLoginDto.email());
+        checkLogin(userLoginDto.email());
 
-        throw new InvalidtokenException();
+        if (isValidLogin)
+            throw new InvalidtokenException();
+
+        return createToken(publicKey,privateKey,userLoginDto.email());
+
     }
 
     public String createToken(PublicKey publicKey, PrivateKey privateKey, String email) {

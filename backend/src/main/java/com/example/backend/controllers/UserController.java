@@ -25,8 +25,6 @@ public class UserController {
     @PostMapping("")
     public User postUser(@RequestBody UserCreator usercreator)
     {
-        User user = service.newUser(usercreator);
-        repo.save(user);
-        return user;
+        return service.newUser(usercreator);
     }
 }
