@@ -46,6 +46,7 @@ public class DatabaseUserService implements UserInterface {
 
     public String createPassword(String username, String role, String cpf) {
         var rawPassword = username + role + cpf;
+        System.out.println(rawPassword);
         return encode(rawPassword);
     }
 
