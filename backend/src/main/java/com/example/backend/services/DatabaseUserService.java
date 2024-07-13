@@ -3,6 +3,7 @@ package com.example.backend.services;
 
 import com.example.backend.dto.UserCreator;
 import com.example.backend.exceptions.ConflictException;
+import com.example.backend.exceptions.InvalidEmailException;
 import com.example.backend.interfaces.UserInterface;
 import com.example.backend.model.User;
 import com.example.backend.repositories.UserJPARepository;
@@ -35,9 +36,8 @@ public class DatabaseUserService implements UserInterface {
             throw new ConflictException();
         }
 
-
         if (!verifyEmail(userCreator.email()))
-            throw new ConflictException(); // create a wrong email exeption
+            throw new InvalidEmailException(); // create a wrong email exeption
 
         String password = createPassword(userCreator.username(),userCreator.role().name(),userCreator.cpf());
         User user = new User(userCreator.username(),userCreator.email(), password,userCreator.role(),userCreator.cpf(),userCreator.cep(),userCreator.street(),userCreator.neighborhood(),userCreator.housenumber());
@@ -46,9 +46,10 @@ public class DatabaseUserService implements UserInterface {
     }
 
     public String createPassword(String username, String role, String cpf) {
-        var rawPassword = username + role + cpf;
-        System.out.println(rawPassword);
-        return encode(rawPassword);
+//        var rawPassword = username + role + cpf;
+//        System.out.println(rawPassword);
+//        return encode(rawPassword);
+        return "123456";
     }
 
     @Override

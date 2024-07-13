@@ -13,8 +13,8 @@ import lombok.*;
 @Table(name = "UserData")
 public class User {
 
-    public User(String userName, String email, String password, Roles role, String cpf, String cep, String street, String neighborhood, String houseNumber) {
-        this.username = userName;
+    public User(String username, String email, String password, Roles role, String cpf, String cep, String street, String neighborhood, String houseNumber) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;

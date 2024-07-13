@@ -19,9 +19,6 @@ public class UserController {
     @Autowired
     UserInterface service;
 
-    @Autowired
-    UserJPARepository repo;
-
     @PostMapping("")
     public User postUser(@RequestBody UserCreator usercreator)
     {
