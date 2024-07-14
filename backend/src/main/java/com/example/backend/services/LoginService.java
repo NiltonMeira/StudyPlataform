@@ -3,7 +3,7 @@ package com.example.backend.services;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.example.backend.dto.UserLoginDto;
+import com.example.backend.dto.user.UserLoginDto;
 import com.example.backend.exceptions.InvalidtokenException;
 import com.example.backend.exceptions.ObjectNotFindException;
 import com.example.backend.interfaces.LoginInterface;
@@ -11,7 +11,6 @@ import com.example.backend.repositories.UserJPARepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.interfaces.RSAPrivateKey;
@@ -45,7 +44,7 @@ public class LoginService  implements LoginInterface {
 
         checkLogin(userLoginDto.email());
 
-        if (isValidLogin)
+        if (!isValidLogin)
             throw new InvalidtokenException();
 
         return createToken(publicKey,privateKey,userLoginDto.email());
