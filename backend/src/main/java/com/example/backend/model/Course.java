@@ -10,10 +10,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity
 @Table(name = "Courses")
-public class Courses {
+public class Course {
+    public Course(String name, String description, String content){
+        this.name = name;
+        this.description = description;
+        this.content = content;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +29,6 @@ public class Courses {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "Video")
-    private String video;
+    @Column(name = "Content")
+    private String content;
 }

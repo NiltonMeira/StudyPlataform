@@ -1,8 +1,8 @@
 User:
 Post - Add User check
-Post - Login
+Post - Login check
 Get - Find All users
-Patch - Edit User
+Patch - Edit User check
 
 ---------------------------------
 Courses:

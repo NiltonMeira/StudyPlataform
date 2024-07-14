@@ -24,7 +24,7 @@ public class Registration {
 
     @ManyToOne
     @JoinColumn(name = "CouseId", referencedColumnName = "id")
-    private Courses course;
+    private Course course;
 
 
 

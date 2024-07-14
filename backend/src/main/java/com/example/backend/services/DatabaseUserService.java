@@ -59,6 +59,14 @@ public class DatabaseUserService implements UserInterface {
         Base64.Decoder decoder = Base64.getDecoder();
         String payload = new String(decoder.decode(chunks[1]));
         System.out.println(payload);
+        String[] parts = payload.split(",");
+        System.out.println(parts[2]);
+        String[] content = parts[2].split(":");
+        System.out.println(content[1]);
+
+        if (payload.contains("Adm")) {
+            System.out.println("Vanessa Linda");
+        }
 
         user.getFirst().setPassword(PasswordEncoder.encode(updatePasswordDto.newPassword()));
         repo.save(user.getFirst());
