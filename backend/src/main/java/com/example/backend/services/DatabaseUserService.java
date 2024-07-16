@@ -2,10 +2,7 @@ package com.example.backend.services;
 
 import com.example.backend.dto.user.UpdatePasswordDto;
 import com.example.backend.dto.user.UserCreatorDto;
-import com.example.backend.exceptions.ConflictException;
-import com.example.backend.exceptions.InvalidEmailException;
-import com.example.backend.exceptions.InvalidPasswordException;
-import com.example.backend.exceptions.ObjectNotFindException;
+import com.example.backend.exceptions.*;
 import com.example.backend.interfaces.UserInterface;
 import com.example.backend.model.User;
 import com.example.backend.repositories.UserJPARepository;
@@ -59,14 +56,13 @@ public class DatabaseUserService implements UserInterface {
         Base64.Decoder decoder = Base64.getDecoder();
         String payload = new String(decoder.decode(chunks[1]));
         System.out.println(payload);
-        String[] parts = payload.split(",");
-        System.out.println(parts[2]);
-        String[] content = parts[2].split(":");
-        System.out.println(content[1]);
+        int startIndex = payload.indexOf("\"sub\":\"") + 7;
+        int endIndex = payload.indexOf("\"", startIndex);
+        String idValue = payload.substring(startIndex, endIndex);
 
-        if (payload.contains("Adm")) {
-            System.out.println("Vanessa Linda");
-        }
+        String stringId =  "" + user.getFirst().getId();
+        if (!payload.contains("Adm") || idValue.equals(stringId))
+            throw new ForbidenException();
 
         user.getFirst().setPassword(PasswordEncoder.encode(updatePasswordDto.newPassword()));
         repo.save(user.getFirst());

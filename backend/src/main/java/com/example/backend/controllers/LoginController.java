@@ -14,7 +14,6 @@ public class LoginController {
     @PostMapping("")
     public String login(@RequestBody UserLoginDto user)
     {
-        System.out.println("banana");
         return service.doLogin(user) ;
     }
 }
