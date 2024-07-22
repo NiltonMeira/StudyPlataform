@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 export const StyledNav = styled.nav`
@@ -16,7 +17,7 @@ export const StyledNav = styled.nav`
     top: 0;
 `
 
-export const StyledA = styled.a`
+export const StyledA = styled(Link)`
     text-decoration: none;
     color: white;
     font-weight: 500;
