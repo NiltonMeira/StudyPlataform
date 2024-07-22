@@ -8,7 +8,8 @@ export const StyledForm = styled.form<IStyledFormProps>`
     justify-content: center;
     flex-direction: column;
     margin-top: ${({customMargin}) => customMargin ? customMargin + "px": "30px"};
-    width: 30%;
+    width: 40%;
+    min-width: 300px;   
     color: white;
     gap: 30px;
     border: 3px #222222 solid;
@@ -18,11 +19,10 @@ export const StyledForm = styled.form<IStyledFormProps>`
 `
 
 export const MainContainer = styled.div`
-    height: 98vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 60px;
 `
 
 export const StyledInput = styled.input`

@@ -6,23 +6,23 @@ import { StyledButton } from "./style";
 
 export const Form = () => {
 
-    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (event: SyntheticEvent<HTMLFormElement, SubmitEvent>) =>{
         event.preventDefault()
-        alert(`The name you entered was: ${name} and the password was ${password}`)
+        alert(`The email you entered was: ${email} and the password was ${password}`)
 
     }
 
     return (
         <>
             <MainContainer>
-                <StyledForm customMargin={30} onSubmit={handleSubmit}>
+                <StyledForm customMargin={30} onSubmit={handleSubmit}>  
                     <p>User</p>
                     <StyledInput
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <p>Password</p>
                     <StyledInput

@@ -24,7 +24,7 @@ export const StyledA = styled(Link)`
     transition: 0.4s;   
 
     &:hover{
-        transform: scale(1.2);
+        transform: scale(1.05);
         color: #0353A4;
     }
     
