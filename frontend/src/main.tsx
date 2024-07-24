@@ -1,36 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { SignUp } from './pages/SignUp/SignUp.tsx'
 import './index.css'
 
 import{
-  createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import { Login } from './pages/Login/Login.tsx'
-import App from './App.tsx'
+
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
+import mainRoutes from './routes/mainroutes.tsx'
 
 
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element:
-    <App>
-      <Login/>
-    </App>
-  },
-  {
-    path: "/signup",
-    element:
-    <App>
-      <SignUp/>
-    </App>
-  }
-])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={mainRoutes} />
+    <ToastContainer />
   </React.StrictMode>,
 )

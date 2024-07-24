@@ -1,48 +1,72 @@
-import { ChangeEvent, SyntheticEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { MainContainer, StyledButton, StyledForm, StyledInput } from "./StyleFomrSignUp"
+import { api } from "../../../service/viaCep"
+import { toast } from "react-toastify"
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form"
 
 
 export const FormSignUp = () => {
 
-    const [name, setName] = useState("")
-    const [email, setemail] = useState("")
+
     const [cep, setCep] = useState("")
-    const [cpf, setCpf] = useState("")
-    const [streetAdress, setStreetAdress] = useState("")
-    const [neighborhood, SetNeighborhood] = useState("")
-    const [streetNumber, setStreetNumber] = useState("")
-    
+    const [adress, setAdress] = useState<viaCepData>()
+    const { register, handleSubmit, setValue } = useForm()
 
-    const handleSubmit = (event: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
-        event.preventDefault()
-        alert(`The name you entered was: ${name} and the password was ${email}`)
-
+    interface viaCepData {
+        cep: string,
+        logradouro: string,
+        complemento: string,
+        unidade: string,
+        bairro: string,
+        localidade: string,
+        uf: string,
+        ibge: string,
+        gia: string,
+        ddd: string,
+        siafi: string
     }
 
-    
+    const submit: SubmitHandler<FieldValues> = (data) => {
+        console.log({ ...data, cep: cep })
+    }
+
     const handleCepChange = (e: ChangeEvent<HTMLInputElement>) => {
         setCep(e.target.value)
-        alert("CEP alterado!")
     }
-    
+
+    useEffect(() => {
+        const getAdress = async () => {
+            console.log(cep)
+            if (cep.length == 8) {
+                try {
+                    const response = await api.get(`ws/${cep}/json/`);
+                    setAdress(response.data)
+                    setValue("streetAdress", response.data.logradouro)
+                    toast.success("Deu boa fi")
+                    console.log(response)
+
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        }
+        getAdress()
+    }, [cep])
     return (
         <>
             <MainContainer>
-                <StyledForm customMargin={30} onSubmit={handleSubmit}>
+                <StyledForm customMargin={30} onSubmit={(handleSubmit(submit))}>
                     <p>Username</p>
                     <StyledInput
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        {...register("username")}
                     />
                     <p>Email</p>
                     <StyledInput
-                        value={email}
-                        onChange={(e) => setemail(e.target.value)}
+                        {...register("email")}
                     />
                     <p>CPF</p>
                     <StyledInput
-                        value={cpf}
-                        onChange={(e) => setCpf(e.target.value)}
+                        {...register("cpf")}
                     />
                     <p >CEP</p>
                     <StyledInput
@@ -51,18 +75,17 @@ export const FormSignUp = () => {
                     />
                     <p>Street Adress</p>
                     <StyledInput
-                        value={streetAdress}
-                        onChange={(e) => setStreetAdress(e.target.value)}
+                        value={adress?.logradouro}
+                        {...register("streetAdress")}
                     />
                     <p>Neighborhood</p>
                     <StyledInput
-                        value={neighborhood}
-                        onChange={(e) => SetNeighborhood(e.target.value)}
+                        value={adress?.bairro}
+                        {...register("neighborhood")}
                     />
                     <p>Street Number</p>
                     <StyledInput
-                        value={streetNumber}
-                        onChange={(e) => setStreetNumber(e.target.value)}
+                        {...register("streetNumber")}
                     />
                     <StyledButton type="submit">SignUp</StyledButton>
                 </StyledForm>
