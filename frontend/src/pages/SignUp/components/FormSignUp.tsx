@@ -26,71 +26,91 @@ export const FormSignUp = () => {
         siafi: string
     }
 
-    const submit: SubmitHandler<FieldValues> = (data) => {
-        console.log({ ...data, cep: cep })
+    interface UserData {
+        username:string,
+        email: string,
+        cpf: string,
+        role: string,
+        cep: string,
+        street: string,
+        neighborhood: string,
+        housenumber: string
+}
+
+const submit: SubmitHandler<FieldValues> = async (data) => {
+    console.log({ ...data, cep: cep })
+    try{
+        const response =await api.post("users")
+        toast.success("Usuario criado com sucesso")
+        console.log(response.data)
+    } catch(error){
+        toast.error("erro ao criar um usuario" + error)
     }
+}
 
-    const handleCepChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setCep(e.target.value)
-    }
+const handleCepChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCep(e.target.value)
 
-    useEffect(() => {
-        const getAdress = async () => {
-            console.log(cep)
-            if (cep.length == 8) {
-                try {
-                    const response = await api.get(`ws/${cep}/json/`);
-                    setAdress(response.data)
-                    setValue("streetAdress", response.data.logradouro)
-                    toast.success("Deu boa fi")
-                    console.log(response)
+    
+}
 
-                } catch (error) {
-                    console.log(error)
-                }
+useEffect(() => {
+    const getAdress = async () => {
+        console.log(cep)
+        if (cep.length == 8) {
+            try {
+                const response = await api.get(`ws/${cep}/json/`);
+                setAdress(response.data)
+                setValue("streetAdress", response.data.logradouro)
+                toast.success("Deu boa fi")
+                console.log(response)
+
+            } catch (error) {
+                console.log(error)
             }
         }
-        getAdress()
-    }, [cep])
-    return (
-        <>
-            <MainContainer>
-                <StyledForm customMargin={30} onSubmit={(handleSubmit(submit))}>
-                    <p>Username</p>
-                    <StyledInput
-                        {...register("username")}
-                    />
-                    <p>Email</p>
-                    <StyledInput
-                        {...register("email")}
-                    />
-                    <p>CPF</p>
-                    <StyledInput
-                        {...register("cpf")}
-                    />
-                    <p >CEP</p>
-                    <StyledInput
-                        value={cep}
-                        onChange={handleCepChange}
-                    />
-                    <p>Street Adress</p>
-                    <StyledInput
-                        value={adress?.logradouro}
-                        {...register("streetAdress")}
-                    />
-                    <p>Neighborhood</p>
-                    <StyledInput
-                        value={adress?.bairro}
-                        {...register("neighborhood")}
-                    />
-                    <p>Street Number</p>
-                    <StyledInput
-                        {...register("streetNumber")}
-                    />
-                    <StyledButton type="submit">SignUp</StyledButton>
-                </StyledForm>
-            </MainContainer>
+    }
+    getAdress()
+}, [cep])
+return (
+    <>
+        <MainContainer>
+            <StyledForm customMargin={30} onSubmit={(handleSubmit(submit))}>
+                <p>Username</p>
+                <StyledInput
+                    {...register("username")}
+                />
+                <p>Email</p>
+                <StyledInput
+                    {...register("email")}
+                />
+                <p>CPF</p>
+                <StyledInput
+                    {...register("cpf")}
+                />
+                <p >CEP</p>
+                <StyledInput
+                    value={cep}
+                    onChange={handleCepChange}
+                />
+                <p>Street Adress</p>
+                <StyledInput
+                    value={adress?.logradouro}
+                    {...register("streetAdress")}
+                />
+                <p>Neighborhood</p>
+                <StyledInput
+                    value={adress?.bairro}
+                    {...register("neighborhood")}
+                />
+                <p>Street Number</p>
+                <StyledInput
+                    {...register("streetNumber")}
+                />
+                <StyledButton type="submit">SignUp</StyledButton>
+            </StyledForm>
+        </MainContainer>
 
-        </>
-    )
+    </>
+)
 }
