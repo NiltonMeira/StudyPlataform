@@ -1,8 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import { MainContainer, StyledButton, StyledForm, StyledInput } from "./StyleFomrSignUp"
-import { api } from "../../../service/viaCep"
+import { viaCepApi } from "../../../service/viaCep"
 import { toast } from "react-toastify"
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form"
+import { api } from "../../../service/api"
 
 
 export const FormSignUp = () => {
@@ -11,6 +12,7 @@ export const FormSignUp = () => {
     const [cep, setCep] = useState("")
     const [adress, setAdress] = useState<viaCepData>()
     const { register, handleSubmit, setValue } = useForm()
+    const role = "Adm";
 
     interface viaCepData {
         cep: string,
@@ -39,8 +41,9 @@ export const FormSignUp = () => {
 
 const submit: SubmitHandler<FieldValues> = async (data) => {
     console.log({ ...data, cep: cep })
+    
     try{
-        const response =await api.post("users")
+        const response =await api.post("users",{ ...data, cep:cep, role:role})
         toast.success("Usuario criado com sucesso")
         console.log(response.data)
     } catch(error){
@@ -50,8 +53,6 @@ const submit: SubmitHandler<FieldValues> = async (data) => {
 
 const handleCepChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCep(e.target.value)
-
-    
 }
 
 useEffect(() => {
@@ -59,7 +60,7 @@ useEffect(() => {
         console.log(cep)
         if (cep.length == 8) {
             try {
-                const response = await api.get(`ws/${cep}/json/`);
+                const response = await viaCepApi.get(`ws/${cep}/json/`);
                 setAdress(response.data)
                 setValue("streetAdress", response.data.logradouro)
                 toast.success("Deu boa fi")

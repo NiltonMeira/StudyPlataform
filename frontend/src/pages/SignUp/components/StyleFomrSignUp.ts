@@ -12,7 +12,7 @@ export const StyledForm = styled.form<IStyledFormProps>`
     min-width: 300px;   
     color: white;
     gap: 30px;
-    border: 3px #222222 solid;
+    border: 3px #222222 sol id;
     padding: 50px;
     border-radius: 5px;
 
