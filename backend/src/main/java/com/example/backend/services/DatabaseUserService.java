@@ -6,17 +6,17 @@ import com.example.backend.exceptions.*;
 import com.example.backend.interfaces.UserInterface;
 import com.example.backend.model.User;
 import com.example.backend.repositories.UserJPARepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.beans.Encoder;
 import java.util.Base64;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.example.backend.services.PasswordEncoder.encode;
 
 @Service
 public class DatabaseUserService implements UserInterface {
@@ -38,7 +38,7 @@ public class DatabaseUserService implements UserInterface {
         if (!verifyEmail(userCreator.email()))
             throw new InvalidEmailException(); // create a wrong email exeption
 
-        String password = createPassword(userCreator.username(),userCreator.role().name(),userCreator.cpf());
+        String password = createPassword();
         User user = new User(userCreator.username(),userCreator.email(), password,userCreator.role(),userCreator.cpf(),userCreator.cep(),userCreator.street(),userCreator.neighborhood(),userCreator.housenumber());
         repo.save(user);
         return user;
@@ -64,16 +64,15 @@ public class DatabaseUserService implements UserInterface {
         if (!payload.contains("Adm") || idValue.equals(stringId))
             throw new ForbidenException();
 
-        user.getFirst().setPassword(PasswordEncoder.encode(updatePasswordDto.newPassword()));
+        user.getFirst().setPassword(encode(updatePasswordDto.newPassword()));
         repo.save(user.getFirst());
-        return PasswordEncoder.encode(updatePasswordDto.newPassword());
+        return encode(updatePasswordDto.newPassword());
     }
 
-    public String createPassword(String username, String role, String cpf) {
-//        var rawPassword = username + role + cpf;
-//        System.out.println(rawPassword);
-//        return encode(rawPassword);
-        return "123456";
+    public String createPassword() {
+        var rawPassword = "123456";
+        System.out.println(rawPassword);
+        return encode(rawPassword);
     }
 
     @Override

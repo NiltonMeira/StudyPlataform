@@ -13,8 +13,9 @@ export const Form = () => {
     const {register, handleSubmit, setValue} = useForm()
 
     const submit: SubmitHandler<FieldValues> = async (data) => {
+        console.log(data)
         try{
-            const response =await api.post("login", data) // the error is in the password hasing on the backend
+            const response =await api.post("login", data) 
             toast.success("Login realizado com sucesso")
             console.log(response.data)
         } catch(error){

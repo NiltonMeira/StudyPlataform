@@ -10,5 +10,4 @@ public record UserCreatorDto(
         String cep,
         String street,
         String neighborhood,
-        String housenumber) {
-}
+        String housenumber) {}

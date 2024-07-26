@@ -39,7 +39,8 @@ public class LoginService  implements LoginInterface {
     @Override
     public String doLogin(UserLoginDto userLoginDto) {
         var users = repo.findByEmail(userLoginDto.email());
-        var oldPassword = users.getFirst().getPassword();
+        System.out.println("Lista de usuarios" + users);
+        var oldPassword = users.get(0).getPassword();
         var isValidLogin = validateLogin(userLoginDto.password(), oldPassword);
 
         checkLogin(userLoginDto.email());
@@ -68,6 +69,6 @@ public class LoginService  implements LoginInterface {
 
     public Boolean validateLogin (String loginPassword, String SavedPassword) {
         PasswordEncoder encoder = new PasswordEncoder();
-        return encoder.matches(loginPassword, SavedPassword);
+        return PasswordEncoder.matches(loginPassword, SavedPassword);
     }
 }

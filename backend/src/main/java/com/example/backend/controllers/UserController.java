@@ -7,6 +7,7 @@ import com.example.backend.interfaces.UserInterface;
 
 import com.example.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -15,6 +16,8 @@ public class UserController {
 
     @Autowired
     UserInterface service;
+
+
 
     @PostMapping("")
     public User postUser(@RequestBody UserCreatorDto usercreator)
