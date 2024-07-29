@@ -1,4 +1,3 @@
-import { SyntheticEvent, useState } from "react";
 import { StyledForm } from "./style"
 import { MainContainer } from "./style"
 import { StyledInput } from "./style";
