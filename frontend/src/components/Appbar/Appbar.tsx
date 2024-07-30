@@ -11,7 +11,7 @@ const Appbar = () =>{
                 <StyledContainer>
                     <StyledA to={"/"} >Login</StyledA>
                     <StyledA to={"/signup"}>Sign up</StyledA>
-                    <StyledA to={"/"}>Classes</StyledA>
+                    <StyledA to={"/home"}>Home</StyledA>
                 </StyledContainer>
     
             </StyledNav>
