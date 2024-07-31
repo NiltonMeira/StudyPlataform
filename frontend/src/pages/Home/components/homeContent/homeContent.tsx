@@ -1,13 +1,17 @@
-import { MainContainer } from "./style"
+import { CardContainer, MainContainer } from "./style"
 import { Card } from "../card/Card"
+import { Welcome } from "../Welcome/Welcome"
 
 export const HomeContent = () => {
     return(
         <>
             <MainContainer>
-                <Card/>
-                <Card/>
-                <Card/>
+                <Welcome/>
+                <CardContainer>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                </CardContainer>
             </MainContainer>
         </>
     )

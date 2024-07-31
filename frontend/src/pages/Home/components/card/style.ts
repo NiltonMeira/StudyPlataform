@@ -7,10 +7,7 @@ export const StyledCard = styled.div`
     justify-content: center;
     align-items: center;
     text-align:center;
-
-    background-color: black;
     color: white;
-
     width: 300px;
     min-height: 200px;
     gap: 15px

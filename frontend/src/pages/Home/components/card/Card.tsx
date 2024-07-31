@@ -21,12 +21,15 @@ export const Card = () => {
     };
 
     const toggleColor = () => {
-        setIsColorChanged(!isColorChanged);
+
+        console.log(isColorChanged)
+        
+        setIsColorChanged(!isColorChanged)
     };
 
     return (
         <>
-            <StyledCard style={{ backgroundColor: isColorChanged ? 'black' : 'darkg' }}>
+            <StyledCard style={{ backgroundColor: isColorChanged ? 'black' : 'blue' }}>
                 <h2>Titulo do cartão</h2>
                 <StyledButton onClick={toggleVisibility}>
                     <p>{isTimeVisible ? 'Esconder' : 'Mostrar'} Tempo</p>
