@@ -6,27 +6,13 @@ export const StyledCard = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align:center;
+
+    max-height: 250px;
+    
     color: white;
-    width: 300px;
-    min-height: 200px;
-    gap: 15px
-`
+    min-width: 300px;
+    background-color: #222222;
+    border-radius: 25px;
 
-export const StyledButton = styled.button`
-    min-width: 120px;
+`  
 
-    background-color: black;
-
-    border: none;
-    border: solid 2px white;
-    border-radius: 15px;
-    padding:15px;
-
-    color: white
-
-    
-
-    
-
-`

@@ -15,6 +15,7 @@ export const StyledNav = styled.nav`
     z-index: 99;
     background-color: #141414;
     top: 0;
+    position: fixed;
 `
 
 export const StyledA = styled(Link)`
